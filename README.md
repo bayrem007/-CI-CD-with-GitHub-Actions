@@ -24,3 +24,12 @@ A minimal CI/CD example that runs on every push and pull request:
 
 ## 🗂 Project structure
 
+├─ src/ # app code (Python )
+├─ tests/ # unit tests (pytest or jest)
+├─ .github/
+│ └─ workflows/
+│ └─ ci.yml # CI workflow
+├─ docs/ # screenshots: green-run.png, failing-run.png, pr-checks.png
+├─ README.md
+└─ LICENSE
+
