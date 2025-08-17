@@ -34,4 +34,4 @@ jobs:
 
           #step 4: Build and run tests 
       - name: Build with Maven
-        run: mvn -B clean verify
+        run: mvn -B -X clean verify
