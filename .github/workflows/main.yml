@@ -1,0 +1,36 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: ["pre-prod"]
+  pull_request: 
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      #step 1: checkout source code 
+      - name: Checkout code
+        uses: actions/checkout@v3 
+
+      #step 2: set up Java 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin' #the recommended OpenJDK builds
+
+        #step 3: cache maven dependencies (to speed up builds)
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os}}-m2-${{hashfiles('**/pom.xml')}}
+          resore-keys : | 
+            ${{ runner.os }}-m2-
+
+          #step 4: Build and run tests 
+      - name: Build with Maven
+        run: mvn -B clean verify
